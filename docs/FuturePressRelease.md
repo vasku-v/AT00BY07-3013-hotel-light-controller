@@ -10,12 +10,15 @@ adjustments often require a technician.
 
 RoomLight puts the lighting design in your hands. A clear visual interface
 allows the staff to adjust brightness, color temperature or full lighting scenes
-across the whole building. And in each room, guests can set the mood through an
-intuitive wall display - no more guessing which button does what.
+across the whole building. Ready-made lighting presets make it easy to set the
+perfect atmosphere with one single tap, and scheduled lighting profiles ensure
+mornings, evenings and events look always just right. In each room, guests can
+set the mood through an intuitive wall display - no more guessing which button
+does what.
 
 _"We wanted to make hotel lighting effortless. With one clear interface, both
-staff and guests have full control," said a Product Engineer at LAB Lighting
-AB._
+staff and guests can create beautiful, consistent lighting without technical
+training," said a Product Engineer at LAB Lighting AB._
 
 RoomLight works immediately after the installation. Open the RoomLight Studio,
 choose or design a lighting setup, and press sync. Even the beginners can create
