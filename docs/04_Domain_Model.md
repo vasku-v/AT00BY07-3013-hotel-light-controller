@@ -18,7 +18,7 @@ A grouping of rooms, such as floor or a suite category. Areas can have their own
 lighting configuration that differs from the rest of the hotel.
 
 → An area _contains many_ **rooms**  
-→ An area _can be_ controlled through **Staff UI**  
+→ An area _is controlled_ through **Staff UI**  
 → An area _can have_ a **lighting scheme** applied
 
 ### Room
@@ -97,7 +97,7 @@ Automatic behavior that resets the guest room lighting between guests.
 A property of a lighting scheme that defines light intensity.
 
 → Brightness _is configured_ in lighting scheme  
-→ Brigthness _is controlled through_ **guest UI** or **staff UI**
+→ Brigthness _is controlled_ through **guest UI** or **staff UI**
 
 ### Light Temperature
 
@@ -105,4 +105,4 @@ A property of a lighting scheme that defines the warmth or coolness of the
 light.
 
 → Light temperature _is configured_ in lighting scheme  
-→ Light temperature _is controlled through_ **guest UI** or **staff UI**
+→ Light temperature _is controlled_ through **guest UI** or **staff UI**
