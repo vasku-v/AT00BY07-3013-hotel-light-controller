@@ -58,13 +58,16 @@ A unified interface that provides full control over all rooms and areas. Allows
 to apply lighting schemes and settings, scheduling changes, as well as to
 monitor the lighting of the entire hotel.
 
-→ Staff UI _is part of_ the **control system**
+→ Staff UI _is part of_ the **control system**  
+→ Staff UI _is used_ to set lighting changes in **rooms**, **areas** and the
+**hotel**
 
 ### Guest UI
 
 A simplified interface for the room-level adjustments.
 
-→ Guest UI _is part of_ the **control system**
+→ Guest UI _is part of_ the **control system**  
+→ Guest UI is _is used_ to set lighting changes in guest **rooms**
 
 ### Lighting Scheme
 
@@ -73,8 +76,8 @@ customized through the staff UI. Schemes can be applied to individual rooms,
 different areas or across the hotel.
 
 → A lighting scheme _can be applied_ to **rooms**, **areas** and the **hotel**  
-→ A lighting scheme _can be configured_ through **staff UI**  
-→ A lighting scheme _can be triggered_ by a _schedule_
+→ A lighting scheme _can be configured_ through **staff UI** and **guest UI**  
+→ A lighting scheme _can be triggered_ by a **schedule**
 
 ### Schedule
 
@@ -96,7 +99,7 @@ Automatic behavior that resets the guest room lighting between guests.
 
 A property of a lighting scheme that defines light intensity.
 
-→ Brightness _is configured_ in lighting scheme  
+→ Brightness _is configured_ in **lighting scheme**  
 → Brigthness _is controlled_ through **guest UI** or **staff UI**
 
 ### Light Temperature
@@ -104,5 +107,5 @@ A property of a lighting scheme that defines light intensity.
 A property of a lighting scheme that defines the warmth or coolness of the
 light.
 
-→ Light temperature _is configured_ in lighting scheme  
+→ Light temperature _is configured_ in **lighting scheme**  
 → Light temperature _is controlled_ through **guest UI** or **staff UI**
