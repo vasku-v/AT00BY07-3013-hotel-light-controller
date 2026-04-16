@@ -11,7 +11,7 @@
 | 007 | Guests can turn off the lights without getting up from bed                                   | Functional     | Should   |
 | 008 | Bathrooms have automatic lights                                                              | Functional     | Could    |
 | 009 | The brightness and temperature of the bathroom lights change in sync with the time of day    | Functional     | Could    |
-| 010 | LightRoom's visual interface has different control panels for hotel staff and guests         | Functional     | Must     |
+| 010 | RoomLight's visual interface has different control panels for hotel staff and guests         | Functional     | Must     |
 | 011 | The guest interface has simplified controls and presets relevant to the room-level lighting  | Functional     | Should   |
 | 012 | The staff can see precisely which area they are changing the lighting for                    | Functional     | Must     |
 | 013 | All lighting controls can be accessed by staff from a single unified view                    | Functional     | Should   |

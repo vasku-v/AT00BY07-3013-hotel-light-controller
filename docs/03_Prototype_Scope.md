@@ -31,7 +31,7 @@ REQ-005 Lighting changes can be scheduled from the visual interface.
   lighting changes, reducing the need for involvement from IT and other
   technicians.
 
-REQ-010 LightRoom's visual interface has different control panels for hotel
+REQ-010 RoomLight's visual interface has different control panels for hotel
 staff and guests.
 
 - The prototype includes two interfaces, one for staff and the other for guests,
