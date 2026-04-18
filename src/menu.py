@@ -43,11 +43,19 @@ def guest_menu():
         print("")
         print("                     Guest Menu")
         print("")
-        print("")
+        print("                 1. Adjust brightness")
+        print("                 2. Adjust light temperature")
+        print("                 3. Reset to default lighting")
         print("                 0. Back to main menu")
 
         choice = ask_choice()
 
+        if (choice == 1):
+            print(" -- adjust brightness in progress --")
+        elif (choice == 2):
+            print(" -- adjust light temperature in progress --")
+        elif (choice == 3):
+            print(" -- reset to default lighting settings in progress --")
         if (choice == 0):
             return
 

@@ -22,7 +22,7 @@ class Room:
             fixture_id = f"{name}-{chr(65 + i)}"
             self.fixtures.append(LightFixture(fixture_id, 80, 4000))
 
-# light fixtures, which brightness and temp is changed
+# light fixtures whose brightness and temp is changed
 class LightFixture:
     def __init__(self, id, brightness, temperature):
         self.id = id
