@@ -1,1 +1,4 @@
 __pycache__/
+
+# Test script to check if the hotel initialization works
+src/test.py

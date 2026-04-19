@@ -1,10 +1,13 @@
+
 # File: components.py
 # Author: Vasilissa Vilkki
 # Description: Classes for lighting scheme adjustments
 
+from datetime import datetime
+
 # physical location a room belongs to
 class Area:
-    def __init__(self, name: str, categories: list):
+    def __init__(self, name: str):
         self.name = name
         self.rooms = []
 
@@ -24,15 +27,8 @@ class Room:
 
 # light fixtures whose brightness and temp is changed
 class LightFixture:
-    def __init__(self, id, brightness, temperature):
+    def __init__(self, id: str, brightness: int, temperature: int):
         self.id = id
-        self.brightness = brightness
-        self.temperature = temperature
-
-# ready-to-go presets through which quick changes to the lighting can be applied
-class Preset:
-    def __init__(self, name, brightness, temperature):
-        self.name = name
         self.brightness = brightness
         self.temperature = temperature
 
@@ -42,6 +38,7 @@ class ControlSystem:
         self.areas = []
         self.rooms = []
         self.schemes = []
+        self.scheduled_tasks = []
     
     def add_area(self, area: object):
         self.areas.append(area)
@@ -60,7 +57,7 @@ class ControlSystem:
         self._set_value(target, "brightness", value)
     
     def set_temperature(self, target, value):
-        self._set_temperature(target, "temperature", value)
+        self._set_value(target, "temperature", value)
     
     # Core brightness and temperature setting logic
     def _set_value(self, target, attr, value):
@@ -74,6 +71,7 @@ class ControlSystem:
         # A single room
         if isinstance(target, Room):
             self._change_light_setting(target, attr, value)
+            return
         
         # A specific area
         if isinstance(target, Area):
@@ -89,3 +87,37 @@ class ControlSystem:
             return
         
         raise ValueError("Unknown target type")
+    
+    def get_room_by_name(self, name: str):
+        for room in self.rooms:
+            if room.name == name:
+                return room
+        return None
+    
+    # Set a new scheduled task
+    def schedule_change(self, time_str, target, attr, value):
+        task = {
+            "time": time_str,
+            "target": target,
+            "attr": attr,
+            "value": value
+        }
+        self.scheduled_tasks.append(task)
+    
+    def run_scheduled_tasks(self):
+        now = datetime.now().strftime("%H:%M")
+
+        tasks_to_run = [t for t in self.scheduled_tasks if t["time"] == now]
+
+        for task in tasks_to_run:
+            self._set_value(task["target"], task["attr"], task["value"])
+            self.scheduled_tasks.remove(task)
+    
+    def remove_scheduled_task(self, index):
+        # Check that the index is within the limits of the scheduled task list
+        if (0 <= index < len(self.scheduled_tasks)):
+            remove_task = self.scheduled_tasks.pop(index)
+            return True
+        return False
+            
+
