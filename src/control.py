@@ -1,4 +1,3 @@
-
 # File: components.py
 # Author: Vasilissa Vilkki
 # Description: Classes for lighting scheme adjustments
