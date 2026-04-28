@@ -1,6 +1,7 @@
 # File: data.py
 # Author: Vasilissa Vilkki
-# Description: Storing the hotel lighting setup data in json form.
+# Description: RoomLight hotel light controller database. Saves ALL room lighting configurations
+#              to a json file.
 
 import json
 from domain import Room, Area, CATEGORIES, ControlSystem

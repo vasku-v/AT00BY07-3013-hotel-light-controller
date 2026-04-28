@@ -1,12 +1,15 @@
 # File: hotel.py
 # Author: Vasilissa Vilkki
-# Description: Initialising hotel 
+# Description: RoomLight hotel light controller hotel initialization. Sets uo the intitial
+#              state for the RoomLight control system.
 
 # CATEGORIES = ["public", "corridor", "guest", "basic", "suite"]
 
 from domain import ControlSystem, Area, Room, CATEGORIES
 
-def create_hotel():
+
+# Factory function that creates the hotel lighting system.
+def create_hotel() -> ControlSystem:
     control_system = ControlSystem()
 
     # -- Define areas of the hotel

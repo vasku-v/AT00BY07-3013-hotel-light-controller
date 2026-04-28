@@ -1,13 +1,14 @@
 # File: menu.py
 # Author: Vasilissa Vilkki
-# Description: Menu logic for staff and guest UI. 
+# Description: RoomLight hotel light controller menu interface. Provides separate control panels for staff 
+#              and guests allowing for user interaction.
 
 import os
 from domain import CATEGORIES, Room
 
 # CATEGORIES = ["public", "corridor", "guest", "basic", "suite"]
 
-# ANSI colors
+# ANSI colors for UI clarity
 YELLOW = "\033[93m"
 CYAN = "\033[96m"
 RED = "\033[0;31m"
@@ -19,13 +20,13 @@ TOTAL_WIDTH = 100
 DEFAULT_TEMP = 4000
 DEFAULT_BRIGHTNESS = 80
 
-# --------------- GENERAL MENU CONFIGURATION -------------
+# --------------- GENERAL MENU CONFIGURATION ---------------
 
 # -- Clear the screen for cleaner UI
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
 
-# -- Read the user input and check if it's in the right format
+# -- Read and validate user input
 def ask_choice() -> int:
     choice = -1
     feed = input("\n> ")
@@ -33,20 +34,19 @@ def ask_choice() -> int:
         choice = int(feed)
     return choice
 
-# -- Ask for empty input before continuing
+# -- Breaks the program execution and waits for user to press enter
 def enter_to_continue():
     print("")
     input("Press Enter to continue...")
 
-
-# -- Renders menu -> title, optional info text and options
+# -- Renders standardized menu layout eith title, info text and options
 def show_menu(title: str, info: str, options, adjuster: int):
     clear()
     print_title(title)
     print_info(info)
     print_options(options, adjuster)
 
-# -- Print a centered title with decorative separators
+# -- Print a centered, decorated title
 def print_title(title: str):
     title = f" {title} "
     dec_width = TOTAL_WIDTH - len(title)
@@ -63,9 +63,7 @@ def print_title(title: str):
 
 # -- Print centered menu options
 def print_options(options, adjuster: int):
-    # Supperts two formats:
-    # 1) Basic dict {1: "Option", 2: "Option"}
-    # 2) Grouped dict {"Group Name": {1: "Option" ... }}
+    # -- Supports flat and grouped dictionaries
 
     # -- Check if grouped
     grouped = True
@@ -75,6 +73,7 @@ def print_options(options, adjuster: int):
             grouped = False
             break
 
+    # -- Calculate alignment based on longest option string
     max_len = 0
     if (grouped):
         for group in options.values():
@@ -104,7 +103,7 @@ def print_options(options, adjuster: int):
             line = f"{key}. {option}"
             print(" " * left + line)
 
-# -- Print centered info text
+# -- Print centered, highlighted info text
 def print_info(info: str):
     # Use ANSI color for emphasis
     colored_text = YELLOW + info + RESET
@@ -120,9 +119,9 @@ def print_info(info: str):
     print(" " * left + colored_text)
     print("")
 
-# --------------- GENERAL MENU CONFIGURATION END -------------
+# --------------- GENERAL MENU CONFIGURATION END ---------------
 
-# --------------- LIGHT SETTING CHANGES -----------------
+# --------------- LIGHT SETTING CHANGES ---------------
 
 def adjust_lighting(control_system, target, title, can_schedule: bool):
     options = {
@@ -178,6 +177,7 @@ def adjust_lighting(control_system, target, title, can_schedule: bool):
             print("Unknown option.")
         enter_to_continue()
 
+# -- Formatting 
 def ask_brightness():
     print("")
     print(CYAN + "Adjust Brightness" + RESET)
@@ -186,6 +186,7 @@ def ask_brightness():
     print(RESET)
     return feed
 
+# -- Formatting
 def ask_light_temp():
     print("")
     print(CYAN + "Adjust Light Temperature" + RESET)
@@ -193,9 +194,12 @@ def ask_light_temp():
     feed = input("> ")
     print(RESET)
     return feed
-               
-# -------------- SCHEDULE ---------------
 
+# --------------- LIGHT SETTING CHANGES END ---------------
+
+# --------------- SCHEDULE ---------------
+
+# REQ-005 Lighting changes can be scheduled from the visual interface.
 def ask_schedule(control_system, value, setting, target):
     print("1. Apply now")
     print("2. Schedule for later")
@@ -212,9 +216,60 @@ def ask_schedule(control_system, value, setting, target):
         time = input("Enter time (HH:MM): ")
         control_system.schedule_setting_change(time, target, setting, value)
         print(f"You have scheduled [{setting}] change for {time}")
-            
+
+# -- See all scheduled tasks and remove them if necessary
+def staff_see_and_manage_tasks(control_system):
+    while True:
+        clear()
+        print_title("Scheduled Tasks Overview")
+
+        tasks = control_system.scheduled_tasks
+
+        if (len(tasks) == 0):
+            print("No tasks scheduled at the moment.")
+            input("\nPress Enter to continue...")
+            return
+
+        else:
+            for i, task in enumerate(tasks, start=1):
+                # -- Which target scheduled task is scheduled to
+                target = task["target"]
+                if (target == "all"):
+                    target_name = "Whole Hotel"
+                elif isinstance(target, str):
+                    target_name = f"Category: {target}"
+                else:
+                    target_name = target.name # -- Both Rooms and Areas can be accessed through this
+                
+                print(f"{i}. Scheduled Time: {task['time']} | Target: {target_name} | Adjusted setting: {task['setting']} | Value: {task['value']}")
+
+            print("\n0. Return to menu")
+            print("1. Remove a scheduled task")
+
+            choice = ask_choice()
+
+            if (choice == 1):
+                feed = input("\nEnter task number to remove: ")
+                if feed.isnumeric():
+                    index = int(feed) - 1
+                    if (control_system.remove_scheduled_task(index)):
+                        print("\nTask removed successfully.")
+                    else:
+                        print("\nUnknown task number.")
+                else:
+                    print("\nUnknown input.")
+                input("\nPress Enter to continue...")
+            elif (choice == 0):
+                return
+            else:
+                print("\nUnknown option.")
+                input("\nPress Enter to continue...")
+
+# --------------- SCHEDULE END ---------------
+
 # --------------- STAFF MENU CONFIGURATION ---------------
 
+# REQ-002 Different areas can be synced to different lighting schemes.
 def staff_choose_by_room(control_system):
     while True:
         clear()
@@ -294,6 +349,7 @@ def staff_choose_by_category(control_system):
         print("Category not found.")
     enter_to_continue()
 
+#REQ-001 The lighting scheme can be designed once and synced to every room through one control system.
 def staff_apply_to_all(control_system):
     adjust_lighting(control_system, "all", "Change lighting setup to the whole hotel", True)
 
@@ -308,58 +364,11 @@ def staff_see_lighting_setup(control_system):
     
     enter_to_continue()
 
-# -- See all scheduled tasks and remove them if necessary
-def staff_see_and_manage_tasks(control_system):
-    while True:
-        clear()
-        print_title("Scheduled Tasks Overview")
-
-        tasks = control_system.scheduled_tasks
-
-        if (len(tasks) == 0):
-            print("No tasks scheduled at the moment.")
-            input("\nPress Enter to continue...")
-            return
-
-        else:
-            for i, task in enumerate(tasks, start=1):
-                # -- Which target scheduled task is scheduled to
-                target = task["target"]
-                if (target == "all"):
-                    target_name = "Whole Hotel"
-                elif isinstance(target, str):
-                    target_name = f"Category: {target}"
-                else:
-                    target_name = target.name # -- Both Rooms and Areas can be accessed through this
-                
-                print(f"{i}. Scheduled Time: {task['time']} | Target: {target_name} | Adjusted setting: {task['setting']} | Value: {task['value']}")
-
-            print("\n0. Return to menu")
-            print("1. Remove a scheduled task")
-
-            choice = ask_choice()
-
-            if (choice == 1):
-                feed = input("\nEnter task number to remove: ")
-                if feed.isnumeric():
-                    index = int(feed) - 1
-                    if (control_system.remove_scheduled_task(index)):
-                        print("\nTask removed successfully.")
-                    else:
-                        print("\nUnknown task number.")
-                else:
-                    print("\nUnknown input.")
-                input("\nPress Enter to continue...")
-            elif (choice == 0):
-                return
-            else:
-                print("\nUnknown option.")
-                input("\nPress Enter to continue...")
-
-# --------------- STAFF MENU CONFIGURATION END---------------
+# --------------- STAFF MENU CONFIGURATION END ---------------
 
 
 # --------------- MENUS -----------------
+# REQ-010 RoomLight's visual interface has different control panels for hotel staff and guests.
 def staff_menu(control_system):
     options = {
         "Control Scope": {
@@ -405,7 +414,7 @@ def staff_menu(control_system):
             print("Unknown option.")
             enter_to_continue()
 
-
+# REQ-010 RoomLight's visual interface has different control panels for hotel staff and guests.
 def guest_menu(control_system):
     room_name = "Basic 202"
 

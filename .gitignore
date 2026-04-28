@@ -1,4 +1,5 @@
 __pycache__/
 
-# Test script to check if the hotel initialization works
-src/test.py
+# Database that is created and edited by running program.
+# Not included as it the file is initialised with hotel.py data
+src/room.json
