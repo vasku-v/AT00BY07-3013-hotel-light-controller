@@ -125,7 +125,7 @@ def print_info(info: str):
 
 def adjust_lighting(control_system, target, title, can_schedule: bool):
     options = {
-        1: "Adjust Brightness (10-100 %)",
+        1: "Adjust Brightness (0-100 %)",
         2: "Adjust Light Temperature (2700-7000 K)",
         3: "Reset to Default",
         0: "Back"
@@ -150,7 +150,7 @@ def adjust_lighting(control_system, target, title, can_schedule: bool):
             feed = ask_brightness()
             if (feed.isnumeric()):
                 value = int(feed)
-                if (10 <= value <= 100):
+                if (0 <= value <= 100):
                     if (can_schedule):
                         ask_schedule(control_system, value, "brightness", target)
                     else:
@@ -181,7 +181,7 @@ def adjust_lighting(control_system, target, title, can_schedule: bool):
 def ask_brightness():
     print("")
     print(CYAN + "Adjust Brightness" + RESET)
-    print(YELLOW + "Enter a value between 10 and 100 %")
+    print(YELLOW + "Enter a value between 0 and 100 %")
     feed = input("> ")
     print(RESET)
     return feed
