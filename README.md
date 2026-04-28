@@ -125,7 +125,7 @@ Data integrity:
 
 Input validation:
 
-- Handling incorrect menu choices and value ranges (e.g., 10-100)
+- Handling incorrect menu choices and value ranges (e.g., 0-100)
 
 #### Phase 1: Manual system testing
 
