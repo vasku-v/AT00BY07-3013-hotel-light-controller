@@ -105,7 +105,7 @@ class ControlSystem:
     def schedule_setting_change(self, sch_time, target, setting, value):
         task = {
             "time": sch_time,
-            "target": target,
+            "target": target.name,
             "setting": setting,
             "value": value
         }

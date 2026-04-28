@@ -1,0 +1,155 @@
+{
+    "rooms": [
+        {
+            "name": "Lobby",
+            "area": "First floor",
+            "categories": [
+                "public"
+            ],
+            "fixture_count": 8,
+            "brightness": 70,
+            "light_temp": 6000
+        },
+        {
+            "name": "Restaurant",
+            "area": "First floor",
+            "categories": [
+                "public"
+            ],
+            "fixture_count": 10,
+            "brightness": 70,
+            "light_temp": 6000
+        },
+        {
+            "name": "Spa",
+            "area": "First floor",
+            "categories": [
+                "public"
+            ],
+            "fixture_count": 8,
+            "brightness": 70,
+            "light_temp": 6000
+        },
+        {
+            "name": "Corridor 1",
+            "area": "First floor",
+            "categories": [
+                "public",
+                "corridor"
+            ],
+            "fixture_count": 6,
+            "brightness": 70,
+            "light_temp": 6000
+        },
+        {
+            "name": "Basic 201",
+            "area": "Second floor",
+            "categories": [
+                "guest",
+                "basic"
+            ],
+            "fixture_count": 3,
+            "brightness": 70,
+            "light_temp": 6000
+        },
+        {
+            "name": "Basic 202",
+            "area": "Second floor",
+            "categories": [
+                "guest",
+                "basic"
+            ],
+            "fixture_count": 3,
+            "brightness": 80,
+            "light_temp": 4000
+        },
+        {
+            "name": "Basic 203",
+            "area": "Second floor",
+            "categories": [
+                "guest",
+                "basic"
+            ],
+            "fixture_count": 3,
+            "brightness": 70,
+            "light_temp": 6000
+        },
+        {
+            "name": "Basic 204",
+            "area": "Second floor",
+            "categories": [
+                "guest",
+                "basic"
+            ],
+            "fixture_count": 3,
+            "brightness": 70,
+            "light_temp": 6000
+        },
+        {
+            "name": "Corridor 2a",
+            "area": "Second floor",
+            "categories": [
+                "public",
+                "corridor"
+            ],
+            "fixture_count": 6,
+            "brightness": 70,
+            "light_temp": 6000
+        },
+        {
+            "name": "Basic 301",
+            "area": "Third floor",
+            "categories": [
+                "guest",
+                "basic"
+            ],
+            "fixture_count": 3,
+            "brightness": 70,
+            "light_temp": 6000
+        },
+        {
+            "name": "Basic 302",
+            "area": "Third floor",
+            "categories": [
+                "guest",
+                "basic"
+            ],
+            "fixture_count": 3,
+            "brightness": 70,
+            "light_temp": 6000
+        },
+        {
+            "name": "Suite 303",
+            "area": "Third floor",
+            "categories": [
+                "guest",
+                "suite"
+            ],
+            "fixture_count": 5,
+            "brightness": 70,
+            "light_temp": 6000
+        },
+        {
+            "name": "Suite 304",
+            "area": "Third floor",
+            "categories": [
+                "guest",
+                "suite"
+            ],
+            "fixture_count": 5,
+            "brightness": 70,
+            "light_temp": 6000
+        },
+        {
+            "name": "Corridor 3a",
+            "area": "Third floor",
+            "categories": [
+                "public",
+                "corridor"
+            ],
+            "fixture_count": 6,
+            "brightness": 70,
+            "light_temp": 6000
+        }
+    ]
+}

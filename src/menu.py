@@ -3,7 +3,6 @@
 # Description: Menu logic for staff and guest UI. 
 
 import os
-from hotel import create_hotel
 from domain import CATEGORIES, Room
 
 # CATEGORIES = ["public", "corridor", "guest", "basic", "suite"]
@@ -19,9 +18,6 @@ TOTAL_WIDTH = 100
 
 DEFAULT_TEMP = 4000
 DEFAULT_BRIGHTNESS = 80
-
-# -- The hotel control system
-control_system = create_hotel()
 
 # --------------- GENERAL MENU CONFIGURATION -------------
 
@@ -157,7 +153,7 @@ def adjust_lighting(control_system, target, title, can_schedule: bool):
                 value = int(feed)
                 if (10 <= value <= 100):
                     if (can_schedule):
-                        ask_schedule(value, "brightness", target)
+                        ask_schedule(control_system, value, "brightness", target)
                     else:
                         control_system.set_brightness(target, value)
                         print(f"Brightness updated to {value} %")
@@ -167,7 +163,7 @@ def adjust_lighting(control_system, target, title, can_schedule: bool):
                 value = int(feed)
                 if (2700 <= value <= 7000):
                     if (can_schedule):
-                        ask_schedule(value, "light temperature", target)
+                        ask_schedule(control_system, value, "light temperature", target)
                     else:
                         control_system.set_light_temp(target, value)
                         print(f"Light temperature updated to {value} K")
@@ -175,6 +171,8 @@ def adjust_lighting(control_system, target, title, can_schedule: bool):
             control_system.set_brightness(target, DEFAULT_BRIGHTNESS)
             control_system.set_light_temp(target, DEFAULT_TEMP)
             print("\nBrightness set to 80 % | Light temperature set to 4000 K")
+        elif (choice == 0):
+            return
         else:
             print("")
             print("Unknown option.")
@@ -198,7 +196,7 @@ def ask_light_temp():
                
 # -------------- SCHEDULE ---------------
 
-def ask_schedule(value, setting, target):
+def ask_schedule(control_system, value, setting, target):
     print("1. Apply now")
     print("2. Schedule for later")
     choice = ask_choice()
@@ -415,7 +413,7 @@ def guest_menu(control_system):
         if (room.name == room_name):
             adjust_lighting(control_system, room, f"Guest Room - {room.name}", False)
 
-def main_menu():
+def main_menu(control_system):
     options = {
         1: "Staff menu",
         2: "Guest menu",
